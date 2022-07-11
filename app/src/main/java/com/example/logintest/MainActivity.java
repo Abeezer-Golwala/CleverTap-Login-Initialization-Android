@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity  implements CTInboxListener 
         Log.d("Testloggin1",sp.getString("LoggedIn",""));
         if(Objects.equals(sp.getString("LoggedIn", ""), "true")) {
             ActivityLifecycleCallback.register(getApplication());
-            Toast.makeText(this,"Activity Life Cycle", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Activity Life Cycle called", Toast.LENGTH_SHORT).show();
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -77,8 +77,10 @@ public class MainActivity extends AppCompatActivity  implements CTInboxListener 
         });
         findViewById(R.id.bt5).setOnClickListener(v->{
             if(Objects.equals(sp.getString("LoggedIn", ""), "true")) {
+//                CleverTapAPI.setInstances();
                 CleverTapAPI clevertapDefaultInstance = CleverTapAPI.getDefaultInstance(getApplicationContext());
                 clevertapDefaultInstance.pushEvent("abeezerinapnotif");
+
             }
         });
         findViewById(R.id.bt4).setOnClickListener(v->{
