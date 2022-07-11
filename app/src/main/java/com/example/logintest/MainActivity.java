@@ -1,7 +1,6 @@
 package com.example.logintest;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -13,13 +12,13 @@ import android.widget.Toast;
 
 import com.clevertap.android.pushtemplates.PushTemplateNotificationHandler;
 import com.clevertap.android.sdk.ActivityLifecycleCallback;
+import com.clevertap.android.sdk.CTInboxListener;
 import com.clevertap.android.sdk.CleverTapAPI;
 import com.clevertap.android.sdk.interfaces.NotificationHandler;
-
 import java.util.HashMap;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity  implements CTInboxListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences sp = getSharedPreferences("MySharedPref" , Context.MODE_PRIVATE);
@@ -64,5 +63,33 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
         findViewById(R.id.bt1).setOnClickListener(v-> MainActivity.this.startActivity(i));
+        findViewById(R.id.bt3).setOnClickListener(v->{
+            if(Objects.equals(sp.getString("LoggedIn", ""), "true")) {
+                CleverTapAPI clevertapDefaultInstance = CleverTapAPI.getDefaultInstance(getApplicationContext());
+                clevertapDefaultInstance.showAppInbox();
+            }
+        });
+        findViewById(R.id.bt6).setOnClickListener(v->{
+            if(Objects.equals(sp.getString("LoggedIn", ""), "true")) {
+                CleverTapAPI clevertapDefaultInstance = CleverTapAPI.getDefaultInstance(getApplicationContext());
+                clevertapDefaultInstance.pushEvent("AbeezerPushEvent");
+            }
+        });
+        findViewById(R.id.bt5).setOnClickListener(v->{
+            if(Objects.equals(sp.getString("LoggedIn", ""), "true")) {
+                CleverTapAPI clevertapDefaultInstance = CleverTapAPI.getDefaultInstance(getApplicationContext());
+                clevertapDefaultInstance.pushEvent("abeezerinapnotif");
+            }
+        });
+        findViewById(R.id.bt4).setOnClickListener(v->{
+            if(Objects.equals(sp.getString("LoggedIn", ""), "true")) {
+                CleverTapAPI clevertapDefaultInstance = CleverTapAPI.getDefaultInstance(getApplicationContext());
+                clevertapDefaultInstance.pushEvent("Abeezergetmsg");
+            }
+        });
     }
+    @Override
+    public void inboxDidInitialize() {}
+    @Override
+    public void inboxMessagesDidUpdate() {}
 }
