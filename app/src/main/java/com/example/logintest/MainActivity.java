@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -89,6 +90,10 @@ public class MainActivity extends AppCompatActivity  implements CTInboxListener 
                 clevertapDefaultInstance.pushEvent("Abeezergetmsg");
             }
         });
+        WebView browser = (WebView) findViewById(R.id.Wv1);
+        browser.getSettings().setJavaScriptEnabled(true);
+        browser.addJavascriptInterface(new CTinterfacenew(CleverTapAPI.getDefaultInstance(this)),"CleverTap");
+        browser.loadUrl("https://abeezerwebtest.000webhostapp.com/");
     }
     @Override
     public void inboxDidInitialize() {}
