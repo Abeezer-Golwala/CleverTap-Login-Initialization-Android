@@ -52,4 +52,10 @@
         android:text="Push Event push Notification"
         android:layout_below="@+id/bt5"
         android:id="@+id/bt6"/>
+    <WebView
+        android:id="@+id/Wv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt6"
+        android:usesCleartextTraffic="true" />
 </RelativeLayout>
